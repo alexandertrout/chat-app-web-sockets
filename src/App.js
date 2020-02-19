@@ -14,12 +14,10 @@ class App extends Component {
     socket.on("join event", num => {
       count++;
       this.setState({ count });
-      console.log(count, "join event receiebved");
     });
     socket.on("leave event", num => {
       count--;
       this.setState({ count });
-      console.log(count, "leave event receiebved");
     });
   }
 
@@ -34,10 +32,11 @@ class App extends Component {
   };
 
   render() {
+    const { user, count } = this.state;
     return (
       <section>
         <div>
-          <Title user={this.state.user} />
+          <Title user={user} clientCount={count} />
         </div>
         {this.state.user === "" && (
           <form onSubmit={this.handleClick}>
@@ -50,7 +49,7 @@ class App extends Component {
             <button>Log in</button>
           </form>
         )}
-        <Chat username={this.state.user} />
+        <Chat username={user} />
       </section>
     );
   }
