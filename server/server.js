@@ -6,8 +6,12 @@ const io = require("socket.io")(http);
 io.on("connection", socket => {
   console.log("user is connected");
 
+  socket.join("test room");
+  io.to("test room").emit("join event", 1);
+
   socket.on("disconnect", () => {
     console.log("user is disconnected");
+    io.to("test room").emit("leave event", -1);
   });
 
   socket.on("chat message", message => {
