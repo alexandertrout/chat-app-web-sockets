@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import openSocket from "socket.io-client";
 const socket = openSocket("http://localhost:3000");
 
-export default class Chat extends Component {
+class Chat extends Component {
   state = {
     message: "",
     messages: []
@@ -51,3 +51,5 @@ export default class Chat extends Component {
     );
   }
 }
+
+export default Chat;

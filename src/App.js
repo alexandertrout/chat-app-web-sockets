@@ -1,8 +1,8 @@
 import "./App.css";
 import React, { Component } from "react";
-import Title from "./Components/Title";
+import Title from "./components/Title";
 import socketIoClient from "socket.io-client";
-import Chat from "./Components/Chat";
+import Chat from "./components/Chat";
 
 const socket = socketIoClient("http://localhost:3000");
 
