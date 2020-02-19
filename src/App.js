@@ -1,9 +1,27 @@
 import "./App.css";
 import React, { Component } from "react";
 import Title from "./Components/Title";
+import socketIoClient from "socket.io-client";
+import Chat from "./Components/Chat";
+
+const socket = socketIoClient("http://localhost:3000");
 
 class App extends Component {
-  state = { user: "", input: "" };
+  state = { user: "", input: "", count: 0 };
+
+  componentDidMount() {
+    let count = 0;
+    socket.on("join event", num => {
+      count++;
+      this.setState({ count });
+      console.log(count, "join event receiebved");
+    });
+    socket.on("leave event", num => {
+      count--;
+      this.setState({ count });
+      console.log(count, "leave event receiebved");
+    });
+  }
 
   handleChange = event => {
     const input = event.target.value;
@@ -32,6 +50,7 @@ class App extends Component {
             <button>Log in</button>
           </form>
         )}
+        <Chat username={this.state.user} />
       </section>
     );
   }
